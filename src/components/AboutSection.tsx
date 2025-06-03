@@ -13,25 +13,25 @@ const AboutSection: React.FC = () => {
           
           <div className="mt-10 grid md:grid-cols-3 gap-8">
             <div className="md:col-span-2">
-              <p className="text-gray-400 mb-4">
+              <p className="text-gray-400 mb-4 text-justify">
                 Hello! I'm a B.Tech student passionate about creating things that live on the internet. 
                 My interest in web development started when I decided to explore how websites work — 
                 turns out hacking together custom website layouts taught me a lot about HTML & CSS!
               </p>
               
-              <p className="text-gray-400 mb-4">
+              <p className="text-gray-400 mb-4 text-justify">
                 Currently, I serve as the Lead of Social Media, Design and Marketing at Blackbox Student Community (BBSC), 
                 where I manage our online presence and create engaging design content. I've also had the privilege 
                 of publishing a magazine for my college, showcasing my creative and editorial skills.
               </p>
               
-              <p className="text-gray-400 mb-4">
+              <p className="text-gray-400 mb-4 text-justify">
                 As a full-stack developer, I enjoy bridging the gap between engineering and design — 
                 combining my technical knowledge with a keen eye for design to create beautiful products. 
                 I'm passionate about creating intuitive, dynamic user experiences that solve real problems.
               </p>
               
-              <p className="text-gray-400">
+              <p className="text-gray-400 text-justify">
                 I've been serving as the Class Representative for 4 years, demonstrating my leadership abilities.
                 Beyond technical skills, I excel in event management and have successfully organized 
                 numerous technical and non-technical college events. This experience has honed my leadership, coordination, and 
