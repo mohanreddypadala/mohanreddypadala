@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Helmet } from 'react-helmet-async';
 const AboutSection: React.FC = () => {
   return (
     <section id="about" className="py-20 bg-[#1a1a1a] text-gray-300">
@@ -55,7 +55,17 @@ const AboutSection: React.FC = () => {
           </div>
         </div>
       </div>
+        <Helmet>
+        <title>About | Mohan Reddy Padala</title>
+        <meta name="description" content="Learn about Mohan Reddy Padala, a full stack developer passionate about web and mobile development, design, and leadership." />
+      </Helmet>
+
+      <section id="about" className="py-20 bg-[#1a1a1a] text-gray-300">
+        {/* your existing about content */}
+        {/* ... */}
+      </section>
     </section>
+    
   );
 };
 

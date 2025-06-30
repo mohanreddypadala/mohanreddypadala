@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ChevronRight } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 
 const HeroSection: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -83,6 +84,15 @@ const HeroSection: React.FC = () => {
           </div>
         </div>
       </div>
+            <Helmet>
+        <title>Mohan Reddy Padala | Full Stack Developer</title>
+        <meta name="description" content="I build modern web and mobile applications with React, Java, Python and more. Explore my portfolio and projects." />
+      </Helmet>
+
+      <section id="hero" className="min-h-screen flex items-center bg-[#1a1a1a] text-gray-300 relative overflow-hidden">
+        {/* your existing content, unchanged */}
+        {/* ... */}
+      </section>
       
       <div className="hidden lg:block absolute right-10 bottom-10">
         <div className="w-32 h-32 border-r-2 border-b-2 border-[#0066cc] opacity-20 animate-pulse"></div>
@@ -92,3 +102,5 @@ const HeroSection: React.FC = () => {
 };
 
 export default HeroSection;
+
+
