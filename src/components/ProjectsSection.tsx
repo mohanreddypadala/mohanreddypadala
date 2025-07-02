@@ -11,7 +11,11 @@ interface Project {
   github?: string;
 }
 
-const ProjectsSection: React.FC = () => {
+interface ProjectsSectionProps {
+  isDarkMode: boolean;
+}
+
+const ProjectsSection: React.FC<ProjectsSectionProps> = ({ isDarkMode }) => {
   const projects: Project[] = [
     {
       id: 1,
@@ -54,18 +58,18 @@ const ProjectsSection: React.FC = () => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
 
   return (
-    <section id="projects" className="py-20 bg-[#1a1a1a] text-gray-300">
+    <section id="projects" className={`py-20 ${isDarkMode ? 'bg-[#0a0a0a] text-gray-300' : 'bg-white text-gray-700'} transition-colors duration-500`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold mb-2 flex items-center">
-            <span className="text-[#0066cc] font-mono mr-2">03.</span>
+            <span className={`${isDarkMode ? 'text-cyan-400' : 'text-gray-600'} font-mono mr-2`}>03.</span>
             Some Things I've Built
-            <div className="ml-4 h-px bg-gray-700 flex-grow"></div>
+            <div className={`ml-4 h-px ${isDarkMode ? 'bg-gray-700' : 'bg-gray-400'} flex-grow`}></div>
           </h2>
           
-          <p className="text-gray-400 mt-4 mb-12">
+          <p className={`${isDarkMode ? 'text-gray-400' : 'text-gray-600'} mt-4 mb-12`}>
             Here are a few projects I've worked on recently. Want to see more? 
-            <a href="#contact" className="text-[#0066cc] hover:underline ml-1">Contact me</a>.
+            <a href="#contact" className={`${isDarkMode ? 'text-cyan-400' : 'text-gray-800'} hover:underline ml-1`}>Contact me</a>.
           </p>
         </div>
         
@@ -85,7 +89,7 @@ const ProjectsSection: React.FC = () => {
                 >
                   <div className="relative rounded-lg overflow-hidden aspect-video">
                     <div 
-                      className={`absolute inset-0 bg-[#0066cc] bg-opacity-20 z-10 transition-opacity duration-300 ${
+                      className={`absolute inset-0 ${isDarkMode ? 'bg-purple-500' : 'bg-gray-600'} bg-opacity-20 z-10 transition-opacity duration-300 ${
                         hoveredProject === project.id ? 'opacity-0' : 'opacity-100'
                       }`}
                     ></div>
@@ -102,16 +106,16 @@ const ProjectsSection: React.FC = () => {
                     index % 2 === 0 ? 'md:col-start-1 md:text-left' : 'md:col-start-7 md:text-right'
                   } md:absolute md:top-0 md:bottom-0 flex flex-col justify-center`}
                 >
-                  <p className="font-mono text-[#0066cc] text-sm mb-1">Featured Project</p>
-                  <h3 className="text-2xl font-bold text-gray-200 mb-4">{project.title}</h3>
+                  <p className={`font-mono ${isDarkMode ? 'text-cyan-400' : 'text-gray-600'} text-sm mb-1`}>Featured Project</p>
+                  <h3 className={`text-2xl font-bold ${isDarkMode ? 'text-gray-200' : 'text-gray-800'} mb-4`}>{project.title}</h3>
                   
-                  <div className="bg-[#262626] p-6 rounded-lg shadow-xl mb-4">
-                    <p className="text-gray-400">{project.description}</p>
+                  <div className={`${isDarkMode ? 'bg-[#1a1a1a]' : 'bg-gray-50'} p-6 rounded-lg shadow-xl mb-4`}>
+                    <p className={`${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{project.description}</p>
                   </div>
                   
                   <div className={`flex flex-wrap gap-2 mb-4 text-xs ${index % 2 === 0 ? '' : 'md:justify-end'}`}>
                     {project.technologies.map((tech, techIndex) => (
-                      <span key={techIndex} className="text-gray-300 font-mono">
+                      <span key={techIndex} className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'} font-mono`}>
                         {tech}
                       </span>
                     ))}
@@ -121,7 +125,7 @@ const ProjectsSection: React.FC = () => {
                     {project.github && (
                       <a 
                         href={project.github} 
-                        className="text-gray-300 hover:text-[#0066cc] transition-colors duration-300"
+                        className={`${isDarkMode ? 'text-gray-300 hover:text-cyan-400' : 'text-gray-600 hover:text-gray-800'} transition-colors duration-300`}
                         aria-label="GitHub Repository"
                       >
                         <Github className="h-5 w-5" />
@@ -130,7 +134,7 @@ const ProjectsSection: React.FC = () => {
                     {project.link && (
                       <a 
                         href={project.link} 
-                        className="text-gray-300 hover:text-[#0066cc] transition-colors duration-300"
+                        className={`${isDarkMode ? 'text-gray-300 hover:text-cyan-400' : 'text-gray-600 hover:text-gray-800'} transition-colors duration-300`}
                         aria-label="Live Demo"
                       >
                         <ExternalLink className="h-5 w-5" />

@@ -10,7 +10,11 @@ interface Certification {
   verificationLink?: string;
 }
 
-const CertificationsSection: React.FC = () => {
+interface CertificationsSectionProps {
+  isDarkMode: boolean;
+}
+
+const CertificationsSection: React.FC<CertificationsSectionProps> = ({ isDarkMode }) => {
   const certifications: Certification[] = [
     {
       id: 1,
@@ -55,16 +59,16 @@ const CertificationsSection: React.FC = () => {
   ];
 
   return (
-    <section id="certifications" className="py-20 bg-[#1a1a1a] text-gray-300">
+    <section id="certifications" className={`py-20 ${isDarkMode ? 'bg-[#0a0a0a] text-gray-300' : 'bg-white text-gray-700'} transition-colors duration-500`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold mb-2 flex items-center">
-            <span className="text-[#0066cc] font-mono mr-2">05.</span>
+            <span className={`${isDarkMode ? 'text-cyan-400' : 'text-gray-600'} font-mono mr-2`}>05.</span>
             Certifications
-            <div className="ml-4 h-px bg-gray-700 flex-grow"></div>
+            <div className={`ml-4 h-px ${isDarkMode ? 'bg-gray-700' : 'bg-gray-400'} flex-grow`}></div>
           </h2>
           
-          <p className="text-gray-400 mt-4 mb-12">
+          <p className={`${isDarkMode ? 'text-gray-400' : 'text-gray-600'} mt-4 mb-12`}>
             Professional certifications that validate my technical skills and expertise.
           </p>
         </div>
@@ -73,23 +77,23 @@ const CertificationsSection: React.FC = () => {
           {certifications.map((cert) => (
             <div 
               key={cert.id}
-              className="bg-[#262626] rounded-lg overflow-hidden transition-transform duration-300 hover:translate-y-[-5px] shadow-lg hover:shadow-[#0066cc]/20"
+              className={`${isDarkMode ? 'bg-[#1a1a1a] hover:shadow-cyan-400/20' : 'bg-gray-50 hover:shadow-gray-400/20'} rounded-lg overflow-hidden transition-transform duration-300 hover:translate-y-[-5px] shadow-lg`}
             >
               <div className="p-6">
                 <div className="flex items-start justify-between">
-                  <h3 className="text-lg font-semibold text-white">{cert.name}</h3>
-                  <CheckCircle className="h-5 w-5 text-[#0066cc] flex-shrink-0 ml-2" />
+                  <h3 className={`text-lg font-semibold ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>{cert.name}</h3>
+                  <CheckCircle className={`h-5 w-5 ${isDarkMode ? 'text-cyan-400' : 'text-gray-600'} flex-shrink-0 ml-2`} />
                 </div>
-                <p className="text-sm text-gray-400 mt-2">{cert.issuer}</p>
-                <p className="text-xs font-mono text-gray-500 mt-2">ID: {cert.credentialId}</p>
+                <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} mt-2`}>{cert.issuer}</p>
+                <p className={`text-xs font-mono ${isDarkMode ? 'text-gray-500' : 'text-gray-500'} mt-2`}>ID: {cert.credentialId}</p>
                 <div className="flex items-center justify-between mt-4">
-                  <span className="text-xs font-mono text-[#0066cc]">{cert.date}</span>
+                  <span className={`text-xs font-mono ${isDarkMode ? 'text-cyan-400' : 'text-gray-600'}`}>{cert.date}</span>
                   {cert.verificationLink && (
                     <a 
                       href={cert.verificationLink} 
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-300 hover:text-[#0066cc] transition-colors duration-300 flex items-center text-sm"
+                      className={`${isDarkMode ? 'text-gray-300 hover:text-cyan-400' : 'text-gray-600 hover:text-gray-800'} transition-colors duration-300 flex items-center text-sm`}
                     >
                       Verify
                       <ExternalLink className="ml-1 h-3 w-3" />
