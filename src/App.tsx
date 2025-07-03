@@ -30,95 +30,117 @@ function App() {
     // Add custom CSS for scrollbar and animations
     const style = document.createElement('style');
     style.textContent = `
+      /* Reset and base styles */
+      * {
+        box-sizing: border-box;
+      }
+      
+      html {
+        font-size: 16px;
+        scroll-behavior: smooth;
+      }
+      
+      body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+
       /* Custom Scrollbar */
       ::-webkit-scrollbar {
         width: 8px;
       }
       ::-webkit-scrollbar-track {
-        background: ${isDarkMode ? '#0a0a0a' : '#f0f0f0'}; 
+        background: ${isDarkMode ? '#000000' : '#ffffff'}; 
       }
       ::-webkit-scrollbar-thumb {
-        background: linear-gradient(45deg, ${isDarkMode ? '#00ffff, #ff00ff' : '#333333, #666666'}); 
+        background: ${isDarkMode ? 'linear-gradient(45deg, #6366f1, #8b5cf6, #ec4899)' : 'linear-gradient(45deg, #1e293b, #475569, #64748b)'}; 
         border-radius: 4px;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(45deg, ${isDarkMode ? '#ff00ff, #00ffff' : '#666666, #333333'}); 
+        background: ${isDarkMode ? 'linear-gradient(45deg, #4f46e5, #7c3aed, #db2777)' : 'linear-gradient(45deg, #0f172a, #334155, #475569)'}; 
       }
       
       /* Grid Pattern Background */
       .bg-grid-pattern {
         background-image: 
-          linear-gradient(to right, ${isDarkMode ? 'rgba(0, 255, 255, 0.1)' : 'rgba(51, 51, 51, 0.1)'} 1px, transparent 1px),
-          linear-gradient(to bottom, ${isDarkMode ? 'rgba(0, 255, 255, 0.1)' : 'rgba(51, 51, 51, 0.1)'} 1px, transparent 1px);
-        background-size: 30px 30px;
-      }
-      
-      /* Smooth Scrolling */
-      html {
-        scroll-behavior: smooth;
+          linear-gradient(to right, ${isDarkMode ? 'rgba(99, 102, 241, 0.03)' : 'rgba(30, 41, 59, 0.05)'} 1px, transparent 1px),
+          linear-gradient(to bottom, ${isDarkMode ? 'rgba(99, 102, 241, 0.03)' : 'rgba(30, 41, 59, 0.05)'} 1px, transparent 1px);
+        background-size: 50px 50px;
       }
 
-      /* Enhanced Animations */
-      @keyframes float {
+      /* Enhanced animations with gradients */
+      @keyframes gentleFloat {
         0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-20px); }
+        50% { transform: translateY(-8px); }
       }
 
-      @keyframes glow {
-        0%, 100% { box-shadow: 0 0 20px ${isDarkMode ? 'rgba(0, 255, 255, 0.3)' : 'rgba(51, 51, 51, 0.3)'}; }
-        50% { box-shadow: 0 0 30px ${isDarkMode ? 'rgba(255, 0, 255, 0.6)' : 'rgba(102, 102, 102, 0.6)'}; }
+      @keyframes gradientGlow {
+        0%, 100% { 
+          box-shadow: 0 0 20px ${isDarkMode ? 'rgba(99, 102, 241, 0.1)' : 'rgba(30, 41, 59, 0.1)'}; 
+        }
+        50% { 
+          box-shadow: 0 0 30px ${isDarkMode ? 'rgba(139, 92, 246, 0.15), 0 0 40px rgba(236, 72, 153, 0.1)' : 'rgba(71, 85, 105, 0.15), 0 0 40px rgba(100, 116, 139, 0.1)'}; 
+        }
       }
 
       @keyframes slideInLeft {
-        from { transform: translateX(-100px); opacity: 0; }
+        from { transform: translateX(-30px); opacity: 0; }
         to { transform: translateX(0); opacity: 1; }
       }
 
       @keyframes slideInRight {
-        from { transform: translateX(100px); opacity: 0; }
+        from { transform: translateX(30px); opacity: 0; }
         to { transform: translateX(0); opacity: 1; }
       }
 
       @keyframes fadeInUp {
-        from { transform: translateY(50px); opacity: 0; }
+        from { transform: translateY(20px); opacity: 0; }
         to { transform: translateY(0); opacity: 1; }
       }
 
-      @keyframes pulse {
+      @keyframes gentlePulse {
         0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.05); }
+        50% { transform: scale(1.01); }
       }
 
-      .animate-float {
-        animation: float 6s ease-in-out infinite;
+      .animate-gentle-float {
+        animation: gentleFloat 10s ease-in-out infinite;
       }
 
-      .animate-glow {
-        animation: glow 2s ease-in-out infinite;
+      .animate-gradient-glow {
+        animation: gradientGlow 4s ease-in-out infinite;
       }
 
       .animate-slide-in-left {
-        animation: slideInLeft 0.8s ease-out;
+        animation: slideInLeft 0.5s ease-out;
       }
 
       .animate-slide-in-right {
-        animation: slideInRight 0.8s ease-out;
+        animation: slideInRight 0.5s ease-out;
       }
 
       .animate-fade-in-up {
-        animation: fadeInUp 0.8s ease-out;
+        animation: fadeInUp 0.5s ease-out;
       }
 
-      .animate-pulse-slow {
-        animation: pulse 3s ease-in-out infinite;
+      .animate-gentle-pulse {
+        animation: gentlePulse 5s ease-in-out infinite;
       }
 
-      /* Gradient Text */
+      /* Enhanced Gradient Text */
       .gradient-text {
-        background: linear-gradient(45deg, ${isDarkMode ? '#00ffff, #ff00ff' : '#333333, #666666'});
+        background: ${isDarkMode ? 'linear-gradient(45deg, #6366f1, #8b5cf6, #ec4899)' : 'linear-gradient(45deg, #1e293b, #475569, #64748b)'};
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
+        background-size: 200% 200%;
+        animation: gradientShift 3s ease-in-out infinite;
+      }
+
+      @keyframes gradientShift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
       }
 
       /* Enhanced Hover Effects */
@@ -127,53 +149,46 @@ function App() {
       }
 
       .hover-lift:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 40px ${isDarkMode ? 'rgba(0, 255, 255, 0.2)' : 'rgba(51, 51, 51, 0.2)'};
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px ${isDarkMode ? 'rgba(99, 102, 241, 0.15), 0 4px 15px rgba(139, 92, 246, 0.1)' : 'rgba(30, 41, 59, 0.15), 0 4px 15px rgba(71, 85, 105, 0.1)'};
       }
 
-      /* Particle Effect */
-      .particles {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        pointer-events: none;
+      /* Gradient Backgrounds */
+      .gradient-bg-primary {
+        background: ${isDarkMode ? 'linear-gradient(135deg, #000000 0%, #1a1a2e 50%, #16213e 100%)' : 'linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%)'};
       }
 
-      .particle {
-        position: absolute;
-        width: 4px;
-        height: 4px;
-        background: linear-gradient(45deg, ${isDarkMode ? '#00ffff, #ff00ff' : '#333333, #666666'});
-        border-radius: 50%;
-        animation: float 8s linear infinite;
+      .gradient-bg-secondary {
+        background: ${isDarkMode ? 'linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%)' : 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)'};
       }
 
-      /* Theme Toggle Button */
-      .theme-toggle {
-        position: fixed;
-        top: 50%;
-        right: 20px;
-        transform: translateY(-50%);
-        z-index: 1000;
-        background: ${isDarkMode ? 'linear-gradient(45deg, #00ffff, #ff00ff)' : 'linear-gradient(45deg, #333333, #666666)'};
-        border: none;
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px ${isDarkMode ? 'rgba(0, 255, 255, 0.3)' : 'rgba(51, 51, 51, 0.3)'};
+      /* Responsive fixes */
+      @media (max-width: 768px) {
+        html {
+          font-size: 14px;
+        }
       }
 
-      .theme-toggle:hover {
-        transform: translateY(-50%) scale(1.1);
-        box-shadow: 0 6px 20px ${isDarkMode ? 'rgba(255, 0, 255, 0.4)' : 'rgba(102, 102, 102, 0.4)'};
+      @media (max-width: 480px) {
+        html {
+          font-size: 13px;
+        }
       }
 
-      .theme-toggle svg {
-        color: ${isDarkMode ? '#0a0a0a' : '#ffffff'};
-        transition: all 0.3s ease;
+      /* Prevent horizontal overflow */
+      .container {
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+
+      /* Reduced motion for accessibility */
+      @media (prefers-reduced-motion: reduce) {
+        .animate-gentle-float,
+        .animate-gradient-glow,
+        .animate-gentle-pulse,
+        .gradient-text {
+          animation: none;
+        }
       }
     `;
     document.head.appendChild(style);
@@ -188,41 +203,17 @@ function App() {
   };
 
   return (
-    <div className={`${isDarkMode ? 'bg-[#0a0a0a]' : 'bg-gray-100'} min-h-screen relative overflow-hidden transition-colors duration-500`}>
-      {/* Theme Toggle Button */}
-      <button
-        onClick={toggleTheme}
-        className="theme-toggle"
-        aria-label="Toggle theme"
-      >
-        {isDarkMode ? (
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z"/>
-            <path d="M12 2V4M12 20V22M4 12H2M6.31412 6.31412L4.8999 4.8999M17.6859 6.31412L19.1001 4.8999M6.31412 17.69L4.8999 19.1042M17.6859 17.69L19.1001 19.1042M22 12H20"/>
-          </svg>
-        ) : (
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-          </svg>
-        )}
-      </button>
-
-      {/* Particle Background */}
-      <div className="particles">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="particle"
-            style={{
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 8}s`,
-              animationDuration: `${8 + Math.random() * 4}s`
-            }}
-          />
-        ))}
-      </div>
+    <div className={`${isDarkMode ? 'gradient-bg-primary' : 'gradient-bg-secondary'} min-h-screen relative transition-all duration-500 overflow-x-hidden`}>
+      {/* Background Pattern */}
+      <div className="fixed inset-0 bg-grid-pattern opacity-40 pointer-events-none"></div>
       
-      <Navbar isDarkMode={isDarkMode} />
+      {/* Enhanced Floating Background Elements with Gradients */}
+      <div className={`fixed top-20 left-10 w-20 h-20 ${isDarkMode ? 'bg-gradient-to-br from-indigo-500/10 to-purple-600/5' : 'bg-gradient-to-br from-slate-400/15 to-slate-600/10'} rounded-full blur-xl animate-gentle-float`}></div>
+      <div className={`fixed bottom-32 right-20 w-16 h-16 ${isDarkMode ? 'bg-gradient-to-br from-purple-500/10 to-pink-500/5' : 'bg-gradient-to-br from-slate-500/15 to-slate-700/10'} rounded-full blur-xl animate-gentle-float`} style={{ animationDelay: '3s' }}></div>
+      <div className={`fixed top-1/2 right-10 w-12 h-12 ${isDarkMode ? 'bg-gradient-to-br from-violet-500/10 to-indigo-500/5' : 'bg-gradient-to-br from-slate-600/15 to-slate-800/10'} rounded-full blur-xl animate-gentle-float`} style={{ animationDelay: '6s' }}></div>
+      <div className={`fixed top-1/4 left-1/4 w-8 h-8 ${isDarkMode ? 'bg-gradient-to-br from-pink-500/10 to-purple-500/5' : 'bg-gradient-to-br from-slate-300/15 to-slate-500/10'} rounded-full blur-xl animate-gentle-float`} style={{ animationDelay: '9s' }}></div>
+      
+      <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
       <HeroSection isDarkMode={isDarkMode} />
       <AboutSection isDarkMode={isDarkMode} />
       <SkillsSection isDarkMode={isDarkMode} />

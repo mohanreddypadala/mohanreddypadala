@@ -58,18 +58,18 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ isDarkMode }) => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
 
   return (
-    <section id="projects" className={`py-20 ${isDarkMode ? 'bg-[#0a0a0a] text-gray-300' : 'bg-white text-gray-700'} transition-colors duration-500`}>
+    <section id="projects" className={`py-20 ${isDarkMode ? 'bg-gradient-to-br from-black via-gray-950 to-slate-900' : 'bg-gradient-to-br from-white via-slate-50 to-gray-100'} ${isDarkMode ? 'text-slate-300' : 'text-slate-700'} transition-all duration-500`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold mb-2 flex items-center">
-            <span className={`${isDarkMode ? 'text-cyan-400' : 'text-gray-600'} font-mono mr-2`}>03.</span>
+            <span className={`${isDarkMode ? 'text-transparent bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text' : 'text-transparent bg-gradient-to-r from-slate-600 to-slate-800 bg-clip-text'} font-mono mr-2`}>03.</span>
             Some Things I've Built
-            <div className={`ml-4 h-px ${isDarkMode ? 'bg-gray-700' : 'bg-gray-400'} flex-grow`}></div>
+            <div className={`ml-4 h-px ${isDarkMode ? 'bg-gradient-to-r from-indigo-500/50 to-transparent' : 'bg-gradient-to-r from-slate-400/50 to-transparent'} flex-grow`}></div>
           </h2>
           
-          <p className={`${isDarkMode ? 'text-gray-400' : 'text-gray-600'} mt-4 mb-12`}>
+          <p className={`${isDarkMode ? 'text-slate-400' : 'text-slate-600'} mt-4 mb-12`}>
             Here are a few projects I've worked on recently. Want to see more? 
-            <a href="#contact" className={`${isDarkMode ? 'text-cyan-400' : 'text-gray-800'} hover:underline ml-1`}>Contact me</a>.
+            <a href="#contact" className={`${isDarkMode ? 'text-transparent bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text' : 'text-transparent bg-gradient-to-r from-slate-700 to-slate-900 bg-clip-text'} hover:underline ml-1 font-medium`}>Contact me</a>.
           </p>
         </div>
         
@@ -87,35 +87,39 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ isDarkMode }) => {
                     index % 2 === 0 ? 'md:col-start-6' : 'md:col-start-1'
                   } relative`}
                 >
-                  <div className="relative rounded-lg overflow-hidden aspect-video">
+                  <div className="relative rounded-lg overflow-hidden aspect-video shadow-2xl">
+                    {/* Enhanced overlay with gradient */}
                     <div 
-                      className={`absolute inset-0 ${isDarkMode ? 'bg-purple-500' : 'bg-gray-600'} bg-opacity-20 z-10 transition-opacity duration-300 ${
+                      className={`absolute inset-0 ${isDarkMode ? 'bg-gradient-to-br from-indigo-500/15 via-purple-500/10 to-pink-500/5' : 'bg-gradient-to-br from-slate-600/15 via-slate-700/10 to-slate-800/5'} z-10 transition-opacity duration-300 ${
                         hoveredProject === project.id ? 'opacity-0' : 'opacity-100'
                       }`}
                     ></div>
                     <img 
                       src={project.image} 
                       alt={project.title} 
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover filter brightness-110 contrast-110 saturate-110"
+                      loading="lazy"
                     />
+                    {/* Gradient border effect */}
+                    <div className={`absolute inset-0 rounded-lg ${isDarkMode ? 'ring-1 ring-gradient-to-br from-indigo-500/20 to-purple-500/20' : 'ring-1 ring-gradient-to-br from-slate-400/20 to-slate-600/20'}`}></div>
                   </div>
                 </div>
                 
                 <div 
                   className={`md:col-span-6 ${
                     index % 2 === 0 ? 'md:col-start-1 md:text-left' : 'md:col-start-7 md:text-right'
-                  } md:absolute md:top-0 md:bottom-0 flex flex-col justify-center`}
+                  } md:absolute md:top-0 md:bottom-0 flex flex-col justify-center mt-6 md:mt-0`}
                 >
-                  <p className={`font-mono ${isDarkMode ? 'text-cyan-400' : 'text-gray-600'} text-sm mb-1`}>Featured Project</p>
-                  <h3 className={`text-2xl font-bold ${isDarkMode ? 'text-gray-200' : 'text-gray-800'} mb-4`}>{project.title}</h3>
+                  <p className={`font-mono ${isDarkMode ? 'text-transparent bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text' : 'text-transparent bg-gradient-to-r from-slate-600 to-slate-800 bg-clip-text'} text-sm mb-1`}>Featured Project</p>
+                  <h3 className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'} mb-4`}>{project.title}</h3>
                   
-                  <div className={`${isDarkMode ? 'bg-[#1a1a1a]' : 'bg-gray-50'} p-6 rounded-lg shadow-xl mb-4`}>
-                    <p className={`${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{project.description}</p>
+                  <div className={`${isDarkMode ? 'bg-gradient-to-br from-slate-900/90 to-gray-900/90 border border-slate-800/50' : 'bg-gradient-to-br from-white/90 to-slate-50/90 border border-slate-200/50'} p-6 rounded-lg shadow-xl mb-4 backdrop-blur-sm`}>
+                    <p className={`${isDarkMode ? 'text-slate-300' : 'text-slate-700'} leading-relaxed`}>{project.description}</p>
                   </div>
                   
-                  <div className={`flex flex-wrap gap-2 mb-4 text-xs ${index % 2 === 0 ? '' : 'md:justify-end'}`}>
+                  <div className={`flex flex-wrap gap-3 mb-4 text-xs ${index % 2 === 0 ? '' : 'md:justify-end'}`}>
                     {project.technologies.map((tech, techIndex) => (
-                      <span key={techIndex} className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'} font-mono`}>
+                      <span key={techIndex} className={`${isDarkMode ? 'text-slate-300 bg-slate-800/50' : 'text-slate-700 bg-slate-200/50'} font-mono px-2 py-1 rounded backdrop-blur-sm`}>
                         {tech}
                       </span>
                     ))}
@@ -125,19 +129,19 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ isDarkMode }) => {
                     {project.github && (
                       <a 
                         href={project.github} 
-                        className={`${isDarkMode ? 'text-gray-300 hover:text-cyan-400' : 'text-gray-600 hover:text-gray-800'} transition-colors duration-300`}
+                        className={`${isDarkMode ? 'text-slate-300 hover:text-indigo-400' : 'text-slate-600 hover:text-slate-900'} transition-all duration-300 hover:scale-110`}
                         aria-label="GitHub Repository"
                       >
-                        <Github className="h-5 w-5" />
+                        <Github className="h-6 w-6" />
                       </a>
                     )}
                     {project.link && (
                       <a 
                         href={project.link} 
-                        className={`${isDarkMode ? 'text-gray-300 hover:text-cyan-400' : 'text-gray-600 hover:text-gray-800'} transition-colors duration-300`}
+                        className={`${isDarkMode ? 'text-slate-300 hover:text-indigo-400' : 'text-slate-600 hover:text-slate-900'} transition-all duration-300 hover:scale-110`}
                         aria-label="Live Demo"
                       >
-                        <ExternalLink className="h-5 w-5" />
+                        <ExternalLink className="h-6 w-6" />
                       </a>
                     )}
                   </div>
